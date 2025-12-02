@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Setup - FB Automation Bot</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        :root {
+            --primary-color: #4F46E5;
+            --secondary-color: #6366F1;
+            --dark-color: #1F2937;
+            --light-color: #F9FAFB;
+            --text-color: #374151;
+            --gray-color: #9CA3AF;
+            --card-bg: #fff;
+            --border-color: #E5E7EB;
+        }
+        .dark-mode {
+            --dark-color: #F9FAFB;
+            --light-color: #18191A;
+            --text-color: #E4E6EB;
+            --gray-color: #B0B3B8;
+            --card-bg: #242526;
+            --border-color: #3A3B3C;
+        }
+        body { font-family: 'Poppins', sans-serif; color: var(--text-color); line-height: 1.8; background-color: var(--light-color); transition: background-color 0.3s, color 0.3s; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+        header { background: var(--card-bg); padding: 1rem 0; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; }
+        .dark-mode header { background: #1F2937; }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 40px; }
+        nav { display: flex; align-items: center; gap: 1rem; }
+        main { padding: 2rem 0 4rem; }
+        .content-card { background-color: var(--card-bg); padding: 2rem 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h1, h2, h3, h4 { color: var(--dark-color); font-weight: 700; margin: 1.5rem 0 1rem; }
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 { color: var(--text-color); }
+        h1 { font-size: 2.5rem; text-align: center; border-bottom: 2px solid var(--primary-color); padding-bottom: 1rem; }
+        h2 { font-size: 1.8rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.4rem; }
+        p, li { margin-bottom: 1rem; }
+        ul, ol { margin-left: 1.5rem; }
+        code { background-color: #eef2ff; color: #4338ca; padding: 0.2rem 0.4rem; border-radius: 4px; font-family: 'Courier New', Courier, monospace; }
+        .dark-mode code { background-color: #3A3B3C; color: #A8B3CF; }
+        pre { background-color: #1F2937; color: #e5e7eb; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+        blockquote { border-left: 4px solid var(--primary-color); padding-left: 1rem; margin: 1.5rem 0; color: #6B7280; font-style: italic; }
+        .dark-mode blockquote { color: #B0B3B8; }
+        a { color: var(--primary-color); text-decoration: none; }
+        footer { text-align: center; padding: 2rem 0; color: var(--gray-color); }
+        .theme-switch-wrapper { display: flex; align-items: center; }
+        .theme-switch { display: inline-block; height: 24px; position: relative; width: 48px; }
+        .theme-switch input { display:none; }
+        .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 24px; }
+        .slider:before { background-color: #fff; bottom: 4px; content: ""; height: 16px; left: 4px; position: absolute; transition: .4s; width: 16px; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--primary-color); }
+        input:checked + .slider:before { transform: translateX(24px); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo"><img src="banner.png" alt="FB-Automation Logo"></a>
+            <nav>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="dark-mode-toggle">
+                        <input type="checkbox" id="dark-mode-toggle" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="content-card">
+                <h1>Panduan Lengkap Instalasi dan Setup Bot</h1>
+<p>Selamat datang! Dokumen ini akan memandu Anda langkah demi langkah untuk menyiapkan dan menjalankan Facebook Automation Bot di komputer Windows atau VPS Linux.</p>
+<hr>
+<h2>Daftar Isi</h2>
+<ol>
+<li><a href="#1-prasyarat">Prasyarat</a></li>
+<li><a href="#2-menyiapkan-folder--konfigurasi">Menyiapkan Folder &amp; Konfigurasi</a></li>
+<li><a href="#3-cara-mendapatkan-kunci-api">Cara Mendapatkan Kunci API</a></li>
+<li><a href="#4-instalasi--menjalankan-bot-di-windows-lokal">Instalasi &amp; Menjalankan Bot di Windows</a></li>
+<li><a href="#5-instalasi--menjalankan-bot-di-vps-linux">Instalasi &amp; Menjalankan Bot di VPS Linux</a></li>
+<li><a href="#6-troubleshooting">Troubleshooting</a></li>
+</ol>
+<hr>
+<h3>1. Prasyarat</h3>
+<p>Sebelum memulai, pastikan Anda sudah memiliki:</p>
+<ul>
+<li><strong>Node.js:</strong> Versi 18.x atau yang lebih baru. Anda bisa mengunduhnya dari <a href="https://nodejs.org/">nodejs.org</a>.</li>
+<li><strong>Text Editor:</strong> Program untuk mengedit file teks, seperti <a href="https://code.visualstudio.com/">Visual Studio Code</a>, Notepad++, atau bahkan Notepad bawaan Windows.</li>
+<li><strong>Akun Facebook:</strong> Siapkan akun yang akan digunakan untuk bot.</li>
+<li><strong>Kunci Lisensi:</strong> Anda akan mendapatkan kunci lisensi dari penjual setelah pembelian.</li>
+</ul>
+<hr>
+<h3>2. Menyiapkan Folder &amp; Konfigurasi</h3>
+<p>Struktur bot ini berbasis folder. Setiap akun Facebook yang ingin Anda otomatisasi harus memiliki foldernya sendiri di dalam direktori <code>accounts</code>.</p>
+<ol>
+<li><strong>Ekstrak File ZIP:</strong> Ekstrak file ZIP yang Anda terima ke lokasi yang Anda inginkan (misalnya, <code>D:\BotFacebook</code>).</li>
+<li><strong>Buka Folder <code>accounts</code>:</strong> Di dalamnya, Anda akan melihat contoh folder.</li>
+<li><strong>Buat Folder Akun Anda:</strong> Buat folder baru untuk setiap akun Facebook Anda. Beri nama yang mudah diingat, misalnya <code>ainia</code> atau <code>john_doe</code>.</li>
+</ol>
+<p>Di dalam setiap folder akun (misal, <code>accounts/ainia/</code>), Anda perlu membuat dan mengisi beberapa file <code>.txt</code>. File-file ini adalah tempat Anda mengontrol apa yang dilakukan bot.</p>
+<p><strong>File-file Konfigurasi Utama (wajib diisi sesuai kebutuhan):</strong></p>
+<ul>
+<li><code>cookies.json</code>: <strong>(Sangat Penting)</strong> File ini akan dibuat secara otomatis oleh bot saat pertama kali login. <strong>Jangan diubah secara manual.</strong></li>
+<li><code>facebook_login.json</code>: Isi dengan kredensial login akun Facebook Anda dalam format JSON.<pre><code class="language-json">{
+  &quot;email&quot;: &quot;email_facebook_anda&quot;,
+  &quot;password&quot;: &quot;password_facebook_anda&quot;,
+  &quot;fa_key&quot;: &quot;kunci_2fa_anda_jika_ada&quot;
+}
+</code></pre>
+</li>
+<li><code>comments.txt</code>: Isi dengan daftar komentar yang akan digunakan bot, <strong>satu komentar per baris</strong>.<pre><code>Keren banget postingannya!
+Mantap, sangat bermanfaat.
+Terima kasih infonya.
+</code></pre>
+</li>
+<li><code>target_groups.txt</code>: Isi dengan URL lengkap grup-grup Facebook yang menjadi target, <strong>satu URL per baris</strong>.<pre><code>https://www.facebook.com/groups/1234567890
+https://www.facebook.com/groups/0987654321
+</code></pre>
+</li>
+<li><code>gemini_keys.txt</code>: Isi dengan kunci API Google Gemini Anda untuk fitur-fitur yang menggunakan AI, <strong>satu kunci per baris</strong>.</li>
+</ul>
+<hr>
+<h3>3. Cara Mendapatkan Kunci API</h3>
+<p>Bot ini menggunakan beberapa layanan eksternal yang memerlukan Kunci API.</p>
+<h4>A. Kunci API Google Gemini (Untuk Komentar AI)</h4>
+<ol>
+<li>Buka <a href="https://aistudio.google.com/app/apikey">Google AI Studio</a>.</li>
+<li>Login dengan akun Google Anda.</li>
+<li>Klik <strong>&quot;Create API key in new project&quot;</strong>.</li>
+<li>Salin kunci yang muncul dan tempelkan ke dalam file <code>gemini_keys.txt</code>.</li>
+</ol>
+<h4>B. Notifikasi Telegram</h4>
+<p>Agar bot bisa mengirim notifikasi, Anda perlu mendapatkan <strong>Bot Token</strong> dan <strong>Chat ID</strong>.</p>
+<ol>
+<li><strong>Mendapatkan Bot Token:</strong><ul>
+<li>Di aplikasi Telegram, cari akun bernama <strong><code>@BotFather</code></strong>.</li>
+<li>Mulai percakapan dengan mengetik <code>/start</code>.</li>
+<li>Ketik <code>/newbot</code> untuk membuat bot baru.</li>
+<li>Ikuti instruksinya untuk memberi nama bot Anda.</li>
+<li>Setelah selesai, BotFather akan memberi Anda sebuah <strong>token</strong>. Salin token ini.</li>
+</ul>
+</li>
+<li><strong>Mendapatkan Chat ID:</strong><ul>
+<li>Cari akun bernama <strong><code>@userinfobot</code></strong>.</li>
+<li>Mulai percakapan dengannya. Bot ini akan langsung menampilkan <strong>Chat ID</strong> Anda. Salin ID ini.</li>
+</ul>
+</li>
+<li><strong>Masukkan ke Konfigurasi:</strong><ul>
+<li>Buka file <code>config/telegram.json</code> dan masukkan token serta ID yang sudah Anda salin.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>4. Instalasi &amp; Menjalankan Bot di Windows (Lokal)</h3>
+<p>Metode ini cocok untuk penggunaan pribadi atau pengujian.</p>
+<ol>
+<li><strong>Buka Command Prompt (CMD) atau PowerShell:</strong><ul>
+<li>Arahkan ke folder tempat Anda mengekstrak bot (misalnya <code>D:\BotFacebook</code>). Caranya, di File Explorer, klik kanan di dalam folder sambil menekan tombol <code>Shift</code>, lalu pilih &quot;Open PowerShell window here&quot; atau &quot;Open command window here&quot;.</li>
+</ul>
+</li>
+<li><strong>Instal Dependensi:</strong><ul>
+<li>Jalankan perintah berikut dan tunggu hingga selesai:<pre><code class="language-bash">npm install --production
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Jalankan Bot:</strong><ul>
+<li>Anda dapat menjalankan tugas spesifik dengan perintah <code>fbproblaster run &lt;NAMA_TUGAS&gt; &lt;NAMA_AKUN&gt;</code>.</li>
+<li><strong>Contoh:</strong> Untuk menjalankan tugas <code>autolike</code> pada akun <code>ainia</code>:<pre><code class="language-bash">fbproblaster run autolike ainia
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>5. Instalasi &amp; Menjalankan Bot di VPS (Linux)</h3>
+<p>Metode ini direkomendasikan agar bot bisa berjalan 24/7.</p>
+<ol>
+<li><strong>Unggah dan Ekstrak File:</strong><ul>
+<li>Unggah file ZIP bot ke VPS Anda dan ekstrak.</li>
+</ul>
+</li>
+<li><strong>Buka Terminal:</strong><ul>
+<li>Arahkan ke folder bot Anda.</li>
+</ul>
+</li>
+<li><strong>Instal Dependensi:</strong><ul>
+<li>Jalankan perintah:<pre><code class="language-bash">npm install --production
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Instal PM2 (Process Manager):</strong><ul>
+<li>PM2 adalah tool yang akan menjaga bot Anda tetap berjalan. Instal secara global:<pre><code class="language-bash">npm install -g pm2
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Jalankan Bot dengan PM2:</strong><ul>
+<li>Gunakan file konfigurasi yang sudah disediakan untuk memulai semua layanan bot (scheduler, telegram, dll.):<pre><code class="language-bash">pm2 start dist/ecosystem.config.js
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Perintah PM2 yang Berguna:</strong><ul>
+<li>Melihat semua proses bot yang berjalan: <code>pm2 list</code></li>
+<li>Melihat log (aktivitas) bot secara real-time: <code>pm2 logs</code></li>
+<li>Menghentikan semua proses bot: <code>pm2 stop all</code></li>
+<li>Menghidupkan ulang semua proses bot: <code>pm2 restart all</code></li>
+<li>Menyimpan konfigurasi agar bot otomatis berjalan saat VPS restart: <code>pm2 save</code> lalu <code>pm2 startup</code>.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>6. Troubleshooting</h3>
+<ul>
+<li><strong>Error <code>Cannot find module</code>:</strong> Pastikan Anda sudah menjalankan <code>npm install --production</code> dan Anda menjalankan perintah dari direktori yang benar.</li>
+<li><strong>Bot Gagal Login:</strong> Periksa kembali <code>facebook_login.json</code>. Pastikan email, password, dan kunci 2FA (jika ada) sudah benar.</li>
+<li><strong>Notifikasi Telegram Tidak Masuk:</strong> Pastikan Bot Token dan Chat ID di <code>config/telegram.json</code> sudah benar.</li>
+</ul>
+<p>Jika Anda mengalami masalah lain, jangan ragu untuk menghubungi kembali penjual. Selamat mencoba!</p>
+
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Marmosm. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    body.classList.add('dark-mode');
+                    darkModeToggle.checked = true;
+                } else {
+                    body.classList.remove('dark-mode');
+                    darkModeToggle.checked = false;
+                }
+            };
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            }
+            darkModeToggle.addEventListener('change', () => {
+                if (darkModeToggle.checked) {
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    body.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
