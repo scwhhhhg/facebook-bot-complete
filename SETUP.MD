@@ -1,4 +1,4 @@
-# FacebookPro Blaster - Complete Installation Guide
+# FacebookPro Blaster - Setup Guide (Preview)
 <div align="right">
   <a href="#english"><strong>EN</strong> English</a> | <a href="#indonesian"><strong>ID</strong> Bahasa Indonesia</a>
 </div>
@@ -7,9 +7,11 @@
 
 <div id="english">
 
-# Complete Installation and Setup Guide for FacebookPro Blaster
+# Setup Guide (Preview) for FacebookPro Blaster
 
-Welcome! This document will guide you step by step to set up and run FacebookPro Blaster on your Windows computer or Linux VPS.
+Welcome! This document is a **preview** of how setup works in the full version. This repository does not ship the operational build.
+
+➡️ Get the full package (download + license): https://facebookpro.gt.tc/
 
 ---
 
@@ -33,7 +35,7 @@ Before you begin, make sure you have:
 
 ---
 
-### 2. Setting Up Folders & Configuration
+### 2. Folder Structure & Configuration (Per Account)
 
 This bot is folder-based. Each Facebook account you want to automate must have its own folder inside the `accounts` directory.
 
@@ -68,9 +70,9 @@ Inside each account folder (e.g., `accounts/account1/`), you need to create and 
 
 ---
 
-### 3. How to Get API Keys
+### 3. API Keys (Centralized)
 
-FacebookPro Blaster uses several external services that require API Keys.
+FacebookPro Blaster uses external services that require API Keys. In the full version, keys are stored **centrally** in `config/` (or via ENV) while bot settings remain **per account**.
 
 #### A. Google Gemini API Key (For AI Comments)
 1.  Open [Google AI Studio](https://aistudio.google.com/app/apikey).
@@ -94,7 +96,7 @@ To enable the bot to send notifications, you need to get a **Bot Token** and **C
 
 ---
 
-### 4. Installation & Running FacebookPro Blaster on Windows (Local)
+### 4. Running on Windows (Local)
 
 This method is suitable for personal use or testing.
 
@@ -114,7 +116,7 @@ This method is suitable for personal use or testing.
 
 ---
 
-### 5. Installation & Running FacebookPro Blaster on VPS (Linux)
+### 5. Running on VPS (Linux)
 
 This method is recommended so that FacebookPro Blaster can run 24/7.
 
@@ -152,7 +154,7 @@ This method is recommended so that FacebookPro Blaster can run 24/7.
 *   **FacebookPro Blaster Failed to Login:** Check `facebook_login.json` again. Make sure email, password, and 2FA key (if any) are correct.
 *   **Telegram Notifications Not Arriving:** Make sure Bot Token and Chat ID in `config/telegram.json` are correct.
 
-If you experience other issues, don't hesitate to contact the seller again. Enjoy using FacebookPro Blaster!
+If you need help onboarding, contact support after purchase.
 
 </div>
 
@@ -160,9 +162,11 @@ If you experience other issues, don't hesitate to contact the seller again. Enjo
 
 <div id="indonesian">
 
-# Panduan Lengkap Instalasi dan Setup FacebookPro Blaster
+# Panduan Setup (Preview) FacebookPro Blaster
 
-Selamat datang! Dokumen ini akan memandu Anda langkah demi langkah untuk menyiapkan dan menjalankan FacebookPro Blaster di komputer Windows atau VPS Linux.
+Selamat datang! Dokumen ini adalah **preview** alur setup pada versi full. Repo ini tidak menyertakan build operasional.
+
+➡️ Dapatkan paket full (download + lisensi): https://facebookpro.gt.tc/
 
 ---
 
@@ -186,7 +190,7 @@ Sebelum memulai, pastikan Anda sudah memiliki:
 
 ---
 
-### 2. Menyiapkan Folder & Konfigurasi
+### 2. Struktur Folder & Konfigurasi (Per Akun)
 
 Struktur bot ini berbasis folder. Setiap akun Facebook yang ingin Anda otomatisasi harus memiliki foldernya sendiri di dalam direktori `accounts`.
 
@@ -221,9 +225,9 @@ Di dalam setiap folder akun (misal, `accounts/account1/`), Anda perlu membuat da
 
 ---
 
-### 3. Cara Mendapatkan Kunci API
+### 3. Kunci API (Terpusat)
 
-FacebookPro Blaster menggunakan beberapa layanan eksternal yang memerlukan Kunci API.
+FacebookPro Blaster menggunakan layanan eksternal yang memerlukan Kunci API. Di versi full, key disimpan **terpusat** di folder `config/` (atau ENV) sedangkan setting bot tetap **per akun**.
 
 #### A. Kunci API Google Gemini (Untuk Komentar AI)
 1.  Buka [Google AI Studio](https://aistudio.google.com/app/apikey).
